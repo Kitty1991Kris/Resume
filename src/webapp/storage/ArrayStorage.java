@@ -3,22 +3,22 @@ package webapp.storage;
 
 import webapp.model.Resume;
 
-public class ArrayStorage {
-    private int storageLength = 10000;
-    private final Resume[] storage = new Resume[storageLength];
+import java.util.Arrays;
+
+public class ArrayStorage implements Storage {
+    private static final int STORAGE_LENGTH = 10000;
+    private final Resume[] storage = new Resume[STORAGE_LENGTH];
     private int size = 0;
 
     public void clear() {
-        for (int i = 0; i < size; i++) {
-            storage[i] = null;
-        }
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
     public void save(Resume resume) {
         if (getIndex(resume.getId()) != -1) {
             System.out.println("Resume is present");
-        } else if(size == storageLength) {
+        } else if(size == STORAGE_LENGTH) {
             System.out.println("Storage overflow");
         } else {
             storage[size] = resume;
@@ -55,11 +55,7 @@ public class ArrayStorage {
     }
 
     public Resume[] getAll() {
-        Resume[] array = new Resume[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = storage[i];
-        }
-        return array;
+        return Arrays.copyOfRange(storage, 0 , size);
     }
 
     public int size() {

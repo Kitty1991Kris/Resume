@@ -28,6 +28,6 @@ public class Resume {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return id.hashCode();
     }
 }
