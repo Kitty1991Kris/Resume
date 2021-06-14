@@ -1,16 +1,21 @@
 package webapp.model;
 
-import java.util.Objects;
+import java.util.UUID;
 
-public class Resume {
-    private String id;
+public class Resume implements Comparable<Resume>{
+    private final String id;
 
-    public String getId() {
-        return id;
+    public Resume(String id) {
+        this.id = id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Resume() {
+        this(UUID.randomUUID().toString());
+    }
+
+    @Override
+    public int compareTo(Resume o) {
+        return id.compareTo(o.id);
     }
 
     @Override
@@ -29,5 +34,9 @@ public class Resume {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    public String getId() {
+        return id;
     }
 }
