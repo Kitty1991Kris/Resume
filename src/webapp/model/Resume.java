@@ -30,6 +30,14 @@ public class Resume implements Comparable<Resume>{
         return section.get(type);
     }
 
+    public void addContact(ContactType type, String value) {
+        contacts.put(type, value);
+    }
+
+    public void addSection(SectionType type, Section sections) {
+        section.put(type, sections);
+    }
+
     @Override
     public int compareTo(Resume o) {
         int i = fullName.compareTo(o.fullName);
@@ -60,4 +68,5 @@ public class Resume implements Comparable<Resume>{
         result = 31 * result + fullName.hashCode();
         return result;
     }
+
 }

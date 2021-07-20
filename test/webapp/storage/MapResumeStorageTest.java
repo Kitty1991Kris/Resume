@@ -1,8 +1,6 @@
 package webapp.storage;
 
-import static org.junit.Assert.*;
-
-public class MapResumeStorageTest {
+public class MapResumeStorageTest extends AbstractStorageTest {
     public Storage createStorage() {
         return new MapResumeStorage();
     }
