@@ -1,24 +1,21 @@
-package webapp.storage;
+package webapp.storage.serializer;
 
 import webapp.exception.StorageException;
 import webapp.model.Resume;
 
 import java.io.*;
 
-public class ObjectStreamPathStorage extends AbstractPathStorage{
-    protected ObjectStreamPathStorage(String directory) {
-        super(directory);
-    }
+public class ObjectStreamSerializer implements StreamSerializerStrategy {
 
     @Override
-    protected void doWrite(Resume resume, OutputStream file) throws IOException {
+    public void doWrite(Resume resume, OutputStream file) throws IOException {
         try (ObjectOutputStream os = new ObjectOutputStream(file)) {
             os.writeObject(resume);
         }
     }
 
     @Override
-    protected Resume doRead(InputStream file) throws IOException {
+    public Resume doRead(InputStream file) throws IOException {
         try (ObjectInputStream is = new ObjectInputStream(file)) {
             return (Resume) is.readObject();
         } catch (ClassNotFoundException e) {
